@@ -17,7 +17,7 @@ For more detailed steps, [follow these instructions][instructions] for your part
 [tm_chrome]: https://chrome.google.com/webstore/detail/tampermonkey/dhdgffkkebhmkfjojejmpbldmpobfkfo
 [tm_safari]: https://tampermonkey.net/index.php?ext=dhdg&browser=safari
 [tm_opera]: https://addons.opera.com/en/extensions/details/tampermonkey-beta/
-[script]: https://raw.githubusercontent.com/schrauger/fanfiction-userscript-professors-point-of-view/master/fanfiction-userscript-professors-point-of-view.js
+[script]: https://raw.githubusercontent.com/schrauger/fanfiction-userscript-professors-point-of-view/master/fanfiction-userscript-professors-point-of-view.user.js
 [instructions]: http://stackapps.com/tags/script/info
 
 ## Known Issues
