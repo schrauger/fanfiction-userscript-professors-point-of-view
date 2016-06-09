@@ -1,6 +1,6 @@
 # fanfiction-userscript-professors-point-of-view
 
-I started to read the fanfiction story [The Professors' Point of View][ff_story], and I quickly got tired of trying to remember which person was talking. The Author uses bold, italic, underline, and combinations to distinguish speakers, rather than writing the person's name.
+I started to read the fanfiction story [The Professors' Point of View][ff_story], and I quickly got lost trying to remember which person was talking. The Author uses bold, italic, underline, and combinations to distinguish speakers, rather than writing the person's name.
 
 This script will prepend the Professor's name to their respective lines. It even automatically pulls in the rotating professor slot (Quirrel, Lupin, etc) and prepends the correct name during their respective chapters.
 
