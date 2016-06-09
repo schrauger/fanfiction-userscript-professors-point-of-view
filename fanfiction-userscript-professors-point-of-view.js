@@ -1,9 +1,14 @@
 // ==UserScript==
 // @name        Fanfiction - The Professors' Point of View - Add Names
 // @namespace   com.schrauger.fanfiction.professorspov
+// @author Stephen Schrauger
+// @description Prepends names to script dialog paragraphs in the Fanfiction story "The Professors' Point of View"
+// @homepage    https://github.com/schrauger/fanfiction-userscript-professors-point-of-view
 // @include     https://www.fanfiction.net/s/7031677/*
-// @version     1.0
+// @version     1.1
 // @grant       none
+// @downloadURL https://raw.githubusercontent.com/schrauger/fanfiction-userscript-professors-point-of-view/master/fanfiction-userscript-professors-point-of-view.js
+// @updateURL   https://raw.githubusercontent.com/schrauger/fanfiction-userscript-professors-point-of-view/master/fanfiction-userscript-professors-point-of-view.js
 // ==/UserScript==
 var objDumbledore = $('#storytext p span:contains("Dumbledore"):first').parent(); // We don't need to check for underlines, because any <p> with a direct <span> child is underlined.
 var objOtherProfessors = $('#storytext p span:contains("Dumbledore"):first').parent().nextUntil("hr");
