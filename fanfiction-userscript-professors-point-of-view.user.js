@@ -6,7 +6,7 @@
 // @homepage    https://github.com/schrauger/fanfiction-userscript-professors-point-of-view
 // @include     https://www.fanfiction.net/s/7031677
 // @include     https://www.fanfiction.net/s/7031677/*
-// @version     1.1.3
+// @version     1.1.4
 // @grant       none
 // @downloadURL https://raw.githubusercontent.com/schrauger/fanfiction-userscript-professors-point-of-view/master/fanfiction-userscript-professors-point-of-view.user.js
 // @updateURL   https://raw.githubusercontent.com/schrauger/fanfiction-userscript-professors-point-of-view/master/fanfiction-userscript-professors-point-of-view.user.js
@@ -26,15 +26,15 @@ $(allProfessors).next('hr').nextUntil('#storytext hr:last','p').each(function(){
   $(this).find('> span').prepend("Dumbledore: ") // dumbledore
 
   //$(this).find('> em:not(:has(strong,span))').prepend($(allProfessors).find(' > em:not(:has(strong,span)):first').text() + ": ") // mcgonagall
-  $(this).find('> em:not(:has(strong,span))').prepend("McGonagall: ") // mcgonagall
+  $(this).find('> em:not(:has(strong,span):first)').prepend("McGonagall: ") // mcgonagall
 
   //$(this).find('> em > span').prepend($(allProfessors).find(' > em > span:first').text() + ": ") //flitwick
-  $(this).find('> em > span').prepend("Flitwick: ") //flitwick
+  $(this).find('> em > span:first').prepend("Flitwick: ") //flitwick
 
   //$(this).find('> em > strong').prepend($(allProfessors).find(' > em > strong:first').text() + ": ") // snape
-  $(this).find('> em > strong').prepend( "Snape: ") // snape
+  $(this).find('> em > strong:first').prepend( "Snape: ") // snape
 
-  $(this).find('> strong').prepend($(allProfessors).find(' > strong:first').text() + ": ") // rotating teacher
+  $(this).find('> strong:first').prepend($(allProfessors).find(' > strong:first').text() + ": ") // rotating teacher
 
 }); 
 /*$(allProfessors).next('hr').nextUntil('#storytext hr:last', 'p:not(:has(em,span,strong))').each(function(){
@@ -44,7 +44,7 @@ $(allProfessors).next('hr').nextUntil('#storytext hr:last','p').each(function(){
     .end()  //again go back to selected element
     .text() + ": ")}); // sprout
 */
-$(allProfessors).next('hr').nextUntil('#storytext hr:last', 'p:not(:has(em,span,strong))').each(function(){
+$(allProfessors).next('hr').nextUntil('#storytext hr:last', 'p:not(:has(em,span,strong)):first').each(function(){
   $(this).prepend("Sprout: ")}); // sprout
 
 })();
