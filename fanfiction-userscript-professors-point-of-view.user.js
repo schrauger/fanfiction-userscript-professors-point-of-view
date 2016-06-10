@@ -6,11 +6,12 @@
 // @homepage    https://github.com/schrauger/fanfiction-userscript-professors-point-of-view
 // @include     https://www.fanfiction.net/s/7031677
 // @include     https://www.fanfiction.net/s/7031677/*
-// @version     1.1.2
+// @version     1.1.3
 // @grant       none
 // @downloadURL https://raw.githubusercontent.com/schrauger/fanfiction-userscript-professors-point-of-view/master/fanfiction-userscript-professors-point-of-view.user.js
 // @updateURL   https://raw.githubusercontent.com/schrauger/fanfiction-userscript-professors-point-of-view/master/fanfiction-userscript-professors-point-of-view.user.js
 // ==/UserScript==
+(function(){
 var objDumbledore = $('#storytext p span:contains("Dumbledore"):first').parent(); // We don't need to check for underlines, because any <p> with a direct <span> child is underlined.
 var objOtherProfessors = $('#storytext p span:contains("Dumbledore"):first').parent().nextUntil("hr");
 var allProfessors = $(objDumbledore).add(objOtherProfessors);
@@ -46,5 +47,4 @@ $(allProfessors).next('hr').nextUntil('#storytext hr:last','p').each(function(){
 $(allProfessors).next('hr').nextUntil('#storytext hr:last', 'p:not(:has(em,span,strong))').each(function(){
   $(this).prepend("Sprout: ")}); // sprout
 
-
-
+})();
