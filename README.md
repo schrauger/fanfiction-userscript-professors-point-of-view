@@ -4,7 +4,7 @@ I started to read the fanfiction story [The Professors' Point of View][ff_story]
 
 This script will prepend the Professor's name to their respective lines. It even automatically pulls in the rotating professor slot (Quirrel, Lupin, etc) and prepends the correct name during their respective chapters.
 
-Some chapters on the story are written in a standard format, rather than the dialog/script format. Most of those chapters are untouched. However, a few chapters mix in script format with standard. In those, my script will (unfortunately) prepend Sprout to the standard dialog paragraphs. Perhaps I'll be able to fix that in the future, or hardcode in some chapter detection.
+Some chapters on the story are written in a standard format, rather than the dialog/script format. Version 2 of the script adds section detection, so it only prepends names to dialog/script sections.
 
 ## Installation Instructions
 The easiest way to install the script is to first have [GreaseMonkey][greasemonkey] ([Firefox][gm_firefox]) or [TamperMonkey][tampermonkey] ([Chrome][tm_chrome], [Safari][tm_safari], [Opera][tm_opera]). If you have those addons installed already, simply [open the script][script] and follow the prompts to install it.
