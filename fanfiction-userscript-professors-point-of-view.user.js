@@ -6,7 +6,7 @@
 // @homepage    https://github.com/schrauger/fanfiction-userscript-professors-point-of-view
 // @include     https://www.fanfiction.net/s/7031677
 // @include     https://www.fanfiction.net/s/7031677/*
-// @version     2.6
+// @version     2.6.1
 // @grant       none
 // @downloadURL https://raw.githubusercontent.com/schrauger/fanfiction-userscript-professors-point-of-view/master/fanfiction-userscript-professors-point-of-view.user.js
 // @updateURL   https://raw.githubusercontent.com/schrauger/fanfiction-userscript-professors-point-of-view/master/fanfiction-userscript-professors-point-of-view.user.js
@@ -128,7 +128,6 @@ $(allProfessors).nextUntil('#storytext hr:last','hr').each(function(){
               )
               && (paragraph_text.charAt(paragraph_text.length-1) == '-')){
             $(this).prepend($(allProfessors).find(' > strong:first:contains("-")').first().text() + ": " + character_error ); // rotating teacher 2
-console.log('adding pomfrey' + paragraph_text);
           } else {
             $(this).prepend($(allProfessors).find(' > strong:first').first().text() + ": " + character_error ); // rotating teacher
           }
