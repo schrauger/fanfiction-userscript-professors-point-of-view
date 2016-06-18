@@ -6,7 +6,7 @@
 // @homepage    https://github.com/schrauger/fanfiction-userscript-professors-point-of-view
 // @include     https://www.fanfiction.net/s/7031677
 // @include     https://www.fanfiction.net/s/7031677/*
-// @version     2.6.1
+// @version     2.6.2
 // @grant       none
 // @downloadURL https://raw.githubusercontent.com/schrauger/fanfiction-userscript-professors-point-of-view/master/fanfiction-userscript-professors-point-of-view.user.js
 // @updateURL   https://raw.githubusercontent.com/schrauger/fanfiction-userscript-professors-point-of-view/master/fanfiction-userscript-professors-point-of-view.user.js
@@ -43,7 +43,7 @@ $(allProfessors).nextUntil('#storytext hr:last','hr').each(function(){
   count_sprout     = $(paragraphs_sprout).size();
 
 
-  if (count_sprout > (count_non_sprout * 2)){
+  if (count_sprout > (count_non_sprout)){
 
     // this has too many standard paragraphs. it is standard writing instead of script writing. don't prepend.
   } else {
