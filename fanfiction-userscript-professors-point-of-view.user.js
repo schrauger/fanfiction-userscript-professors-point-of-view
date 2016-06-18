@@ -6,7 +6,7 @@
 // @homepage    https://github.com/schrauger/fanfiction-userscript-professors-point-of-view
 // @include     https://www.fanfiction.net/s/7031677
 // @include     https://www.fanfiction.net/s/7031677/*
-// @version     2.4
+// @version     2.5
 // @grant       none
 // @downloadURL https://raw.githubusercontent.com/schrauger/fanfiction-userscript-professors-point-of-view/master/fanfiction-userscript-professors-point-of-view.user.js
 // @updateURL   https://raw.githubusercontent.com/schrauger/fanfiction-userscript-professors-point-of-view/master/fanfiction-userscript-professors-point-of-view.user.js
@@ -126,7 +126,15 @@ $(allProfessors).nextUntil('#storytext hr:last','hr').each(function(){
         }
       });
 
-    //});
+    $(paragraphs).not('.character').each(function(){
+      if (($(this).is(":contains('…')")) && ($(this)[0].textContent.length < 2)) {
+        // paragraph only contains elipsis (…). set to previous paragraph speaker
+        previous_text = $(this).prev().text();
+        previous_speaker = previous_text.substr(0, previous_text.indexOf(':'));
+        $(this).prepend(previous_speaker + ": ");
+        $(this).closest("p").addClass("character");
+      }
+    });
     $(paragraphs).not('.character').prepend("Sprout: "); // sprout. due to text nodes being difficult, just assign sprout to all paragraphs that don't have our special class added by the end.
 
   }
