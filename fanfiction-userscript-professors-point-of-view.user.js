@@ -6,7 +6,7 @@
 // @homepage    https://github.com/schrauger/fanfiction-userscript-professors-point-of-view
 // @include     https://www.fanfiction.net/s/7031677
 // @include     https://www.fanfiction.net/s/7031677/*
-// @version     2.3
+// @version     2.4
 // @grant       none
 // @downloadURL https://raw.githubusercontent.com/schrauger/fanfiction-userscript-professors-point-of-view/master/fanfiction-userscript-professors-point-of-view.user.js
 // @updateURL   https://raw.githubusercontent.com/schrauger/fanfiction-userscript-professors-point-of-view/master/fanfiction-userscript-professors-point-of-view.user.js
@@ -57,28 +57,56 @@ $(allProfessors).nextUntil('#storytext hr:last','hr').each(function(){
           // :first only works on element nodes, not text nodes.
           // if there is a previous sibling, ignore this node. because another character is speaking using underlines, italics, etc within their line (very annoying for this script)
           // Except! If there is a previous sibling, but its length is only 1 character (likely a quotation mark), act as though it doesn't exist, and continue prepending the name as normal.
-          $(this).prepend("Dumbledore: ") // dumbledore
+          if ($(this)[0].previousSibling){
+            character_error = $(this)[0].previousSibling.textContent;
+            $(this)[0].previousSibling.textContent = "";
+          } else {
+            character_error = "";
+          }
+          $(this).prepend("Dumbledore: " + character_error); // dumbledore
+
           $(this).closest("p").addClass("character");
         }
       });
 
       $(paragraphs).find('> em:not(:has(strong,span)):first').each(function(){
         if (!$(this)[0].previousSibling || $(this)[0].previousSibling.textContent.length < 2){
-          $(this).prepend("McGonagall: ") // mcgonagall
+          if ($(this)[0].previousSibling){
+            character_error = $(this)[0].previousSibling.textContent;
+            $(this)[0].previousSibling.textContent = "";
+          } else {
+            character_error = "";
+          }
+          $(this).prepend("McGonagall: " + character_error); // mcgonagall
+
           $(this).closest("p").addClass("character");
         }
       });
       
       $(paragraphs).find('> em > span:first').each(function(){
-        if (!$(this)[0].previousSibling || $(this)[0].previousSibling.textContent.length < 2){
-          $(this).prepend("Flitwick: ") //flitwick
+        if (!$(this).parent()[0].previousSibling || $(this).parent()[0].previousSibling.textContent.length < 2){
+          if ($(this).parent()[0].previousSibling){
+            character_error = $(this).parent()[0].previousSibling.textContent;
+            $(this).parent()[0].previousSibling.textContent = "";
+          } else {
+            character_error = "";
+          }
+          $(this).prepend("Flitwick: " + character_error); //flitwick
+
           $(this).closest("p").addClass("character");
         }
       });
 
       $(paragraphs).find('> em > strong:first').each(function(){
-        if (!$(this)[0].previousSibling || $(this)[0].previousSibling.textContent.length < 2){
-          $(this).prepend( "Snape: ") // snape
+        if (!$(this).parent()[0].previousSibling || $(this).parent()[0].previousSibling.textContent.length < 2){
+          if ($(this).parent()[0].previousSibling){
+            character_error = $(this).parent()[0].previousSibling.textContent;
+            $(this).parent()[0].previousSibling.textContent = "";
+          } else {
+            character_error = "";
+          }
+          $(this).prepend( "Snape: " + character_error); // snape
+
           $(this).closest("p").addClass("character");
         }
       });
@@ -86,7 +114,14 @@ $(allProfessors).nextUntil('#storytext hr:last','hr').each(function(){
 
       $(paragraphs).find('> strong:first').each(function(){
         if (!$(this)[0].previousSibling || $(this)[0].previousSibling.textContent.length < 2){
-          $(this).prepend($(allProfessors).find(' > strong:first').text() + ": ") // rotating teacher
+          if ($(this)[0].previousSibling){
+            character_error = $(this)[0].previousSibling.textContent;
+            $(this)[0].previousSibling.textContent = "";
+          } else {
+            character_error = "";
+          }
+          $(this).prepend($(allProfessors).find(' > strong:first').text() + ": " + character_error ); // rotating teacher
+
           $(this).closest("p").addClass("character");
         }
       });
