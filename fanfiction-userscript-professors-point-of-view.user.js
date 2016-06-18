@@ -13,6 +13,10 @@
 // ==/UserScript==
 (function(){
 var objDumbledore = $('#storytext p span:contains("Dumbledore"):first').parent(); // We don't need to check for underlines, because any <p> with a direct <span> child is underlined.
+// note: as of 2016, the author hasn't made it past dumbledore's death. 
+// after that point, this check presumably will fail, since dumbledore 
+// will no longer have a speaking role, and may not be included in the key.
+// we'll cross that bridge when it comes.
 var objOtherProfessors = $('#storytext p span:contains("Dumbledore"):first').parent().nextUntil("hr");
 var allProfessors = $(objDumbledore).add(objOtherProfessors);
 
