@@ -6,7 +6,7 @@
 // @homepage    https://github.com/schrauger/fanfiction-userscript-professors-point-of-view
 // @include     https://www.fanfiction.net/s/7031677
 // @include     https://www.fanfiction.net/s/7031677/*
-// @version     2.0
+// @version     2.2
 // @grant       none
 // @downloadURL https://raw.githubusercontent.com/schrauger/fanfiction-userscript-professors-point-of-view/master/fanfiction-userscript-professors-point-of-view.user.js
 // @updateURL   https://raw.githubusercontent.com/schrauger/fanfiction-userscript-professors-point-of-view/master/fanfiction-userscript-professors-point-of-view.user.js
@@ -29,12 +29,12 @@ $(allProfessors).nextUntil('#storytext hr:last','hr').each(function(){
   paragraphs = $(this).nextUntil('hr','p');
   paragraphs_sprout = $(this).nextUntil('hr',':not(:has(em,span,strong))');
 
-  count_dumbledore = $(paragraphs).find(' > span').size();
+  count_dumbledore = $(paragraphs).find(' > span:first').size();
   count_mcgonagall = $(paragraphs).find(' > em:not(:has(strong,span)):first').size();
   count_flitwick   = $(paragraphs).find(' > em > span:first').size();
   count_snape      = $(paragraphs).find(' > em > strong:first').size();
   count_other      = $(paragraphs).find(' > strong:first').size();
-
+  
   count_non_sprout = count_dumbledore + count_mcgonagall + count_flitwick + count_snape + count_other;
   count_sprout     = $(paragraphs_sprout).size();
 
@@ -45,24 +45,50 @@ $(allProfessors).nextUntil('#storytext hr:last','hr').each(function(){
   } else {
 
     // this is script writing. prepend.
-    $(paragraphs).each(function(){
-      //$(this).find('> span').prepend($(allProfessors).find(' > span:first').text() + ": ") // dumbledore
-      $(this).find('> span').prepend("Dumbledore: ") // dumbledore
+    //$(paragraphs).each(function(){
 
-      //$(this).find('> em:not(:has(strong,span))').prepend($(allProfessors).find(' > em:not(:has(strong,span)):first').text() + ": ") // mcgonagall
-      $(this).find('> em:not(:has(strong,span)):first').prepend("McGonagall: ") // mcgonagall
+      $(paragraphs).find('> span:first').each(function(){
+        if (!$(this)[0].previousSibling){
+          // make sure there are no previous text nodes (jquery can't handle text-only nodes, so use basic js).
+          // :first only works on element nodes, not text nodes.
+          // if there is a previous sibling, ignore this node. because another character is speaking using underlines, italics, etc within their line (very annoying for this script)
+          $(this).prepend("Dumbledore: ") // dumbledore
+          $(this).closest("p").addClass("character");
+        }
+      });
 
-      //$(this).find('> em > span').prepend($(allProfessors).find(' > em > span:first').text() + ": ") //flitwick
-      $(this).find('> em > span:first').prepend("Flitwick: ") //flitwick
+      $(paragraphs).find('> em:not(:has(strong,span)):first').each(function(){
+        if (!$(this)[0].previousSibling){
+          $(this).prepend("McGonagall: ") // mcgonagall
+          $(this).closest("p").addClass("character");
+        }
+      });
+      
+      $(paragraphs).find('> em > span:first').each(function(){
+        if (!$(this)[0].previousSibling){
+          $(this).prepend("Flitwick: ") //flitwick
+          $(this).closest("p").addClass("character");
+        }
+      });
 
-      //$(this).find('> em > strong').prepend($(allProfessors).find(' > em > strong:first').text() + ": ") // snape
-      $(this).find('> em > strong:first').prepend( "Snape: ") // snape
+      $(paragraphs).find('> em > strong:first').each(function(){
+        if (!$(this)[0].previousSibling){
+          $(this).prepend( "Snape: ") // snape
+          $(this).closest("p").addClass("character");
+        }
+      });
 
-      $(this).find('> strong:first').prepend($(allProfessors).find(' > strong:first').text() + ": ") // rotating teacher
-    });
-    $(paragraphs_sprout).each(function(){
-      $(this).prepend("Sprout: "); // sprout
-    }); 
+
+      $(paragraphs).find('> strong:first').each(function(){
+        if (!$(this)[0].previousSibling){
+          $(this).prepend($(allProfessors).find(' > strong:first').text() + ": ") // rotating teacher
+          $(this).closest("p").addClass("character");
+        }
+      });
+
+    //});
+    $(paragraphs).not('.character').prepend("Sprout: "); // sprout. due to text nodes being difficult, just assign sprout to all paragraphs that don't have our special class added by the end.
+
   }
 })
 
