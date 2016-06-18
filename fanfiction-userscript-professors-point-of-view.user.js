@@ -6,7 +6,7 @@
 // @homepage    https://github.com/schrauger/fanfiction-userscript-professors-point-of-view
 // @include     https://www.fanfiction.net/s/7031677
 // @include     https://www.fanfiction.net/s/7031677/*
-// @version     2.5
+// @version     2.6
 // @grant       none
 // @downloadURL https://raw.githubusercontent.com/schrauger/fanfiction-userscript-professors-point-of-view/master/fanfiction-userscript-professors-point-of-view.user.js
 // @updateURL   https://raw.githubusercontent.com/schrauger/fanfiction-userscript-professors-point-of-view/master/fanfiction-userscript-professors-point-of-view.user.js
@@ -113,15 +113,25 @@ $(allProfessors).nextUntil('#storytext hr:last','hr').each(function(){
 
 
       $(paragraphs).find('> strong:first').each(function(){
-        if (!$(this)[0].previousSibling || $(this)[0].previousSibling.textContent.length < 2){
+        if (!$(this)[0].previousSibling || $(this)[0].previousSibling.textContent.length < 3){
           if ($(this)[0].previousSibling){
             character_error = $(this)[0].previousSibling.textContent;
             $(this)[0].previousSibling.textContent = "";
           } else {
             character_error = "";
           }
-          $(this).prepend($(allProfessors).find(' > strong:first').text() + ": " + character_error ); // rotating teacher
-
+          paragraph_text = $(this).closest('p').text();
+          if ((
+                (paragraph_text.charAt(0) == '-') 
+                ||
+                (character_error.charAt(0) == '-')
+              )
+              && (paragraph_text.charAt(paragraph_text.length-1) == '-')){
+            $(this).prepend($(allProfessors).find(' > strong:first:contains("-")').first().text() + ": " + character_error ); // rotating teacher 2
+console.log('adding pomfrey' + paragraph_text);
+          } else {
+            $(this).prepend($(allProfessors).find(' > strong:first').first().text() + ": " + character_error ); // rotating teacher
+          }
           $(this).closest("p").addClass("character");
         }
       });
