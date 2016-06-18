@@ -6,7 +6,7 @@
 // @homepage    https://github.com/schrauger/fanfiction-userscript-professors-point-of-view
 // @include     https://www.fanfiction.net/s/7031677
 // @include     https://www.fanfiction.net/s/7031677/*
-// @version     2.2
+// @version     2.3
 // @grant       none
 // @downloadURL https://raw.githubusercontent.com/schrauger/fanfiction-userscript-professors-point-of-view/master/fanfiction-userscript-professors-point-of-view.user.js
 // @updateURL   https://raw.githubusercontent.com/schrauger/fanfiction-userscript-professors-point-of-view/master/fanfiction-userscript-professors-point-of-view.user.js
@@ -48,31 +48,32 @@ $(allProfessors).nextUntil('#storytext hr:last','hr').each(function(){
     //$(paragraphs).each(function(){
 
       $(paragraphs).find('> span:first').each(function(){
-        if (!$(this)[0].previousSibling){
+        if (!$(this)[0].previousSibling || $(this)[0].previousSibling.textContent.length < 2){
           // make sure there are no previous text nodes (jquery can't handle text-only nodes, so use basic js).
           // :first only works on element nodes, not text nodes.
           // if there is a previous sibling, ignore this node. because another character is speaking using underlines, italics, etc within their line (very annoying for this script)
+          // Except! If there is a previous sibling, but its length is only 1 character (likely a quotation mark), act as though it doesn't exist, and continue prepending the name as normal.
           $(this).prepend("Dumbledore: ") // dumbledore
           $(this).closest("p").addClass("character");
         }
       });
 
       $(paragraphs).find('> em:not(:has(strong,span)):first').each(function(){
-        if (!$(this)[0].previousSibling){
+        if (!$(this)[0].previousSibling || $(this)[0].previousSibling.textContent.length < 2){
           $(this).prepend("McGonagall: ") // mcgonagall
           $(this).closest("p").addClass("character");
         }
       });
       
       $(paragraphs).find('> em > span:first').each(function(){
-        if (!$(this)[0].previousSibling){
+        if (!$(this)[0].previousSibling || $(this)[0].previousSibling.textContent.length < 2){
           $(this).prepend("Flitwick: ") //flitwick
           $(this).closest("p").addClass("character");
         }
       });
 
       $(paragraphs).find('> em > strong:first').each(function(){
-        if (!$(this)[0].previousSibling){
+        if (!$(this)[0].previousSibling || $(this)[0].previousSibling.textContent.length < 2){
           $(this).prepend( "Snape: ") // snape
           $(this).closest("p").addClass("character");
         }
@@ -80,7 +81,7 @@ $(allProfessors).nextUntil('#storytext hr:last','hr').each(function(){
 
 
       $(paragraphs).find('> strong:first').each(function(){
-        if (!$(this)[0].previousSibling){
+        if (!$(this)[0].previousSibling || $(this)[0].previousSibling.textContent.length < 2){
           $(this).prepend($(allProfessors).find(' > strong:first').text() + ": ") // rotating teacher
           $(this).closest("p").addClass("character");
         }
