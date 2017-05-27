@@ -10,6 +10,7 @@ Some chapters on the story are written in a standard format, rather than the dia
 The easiest way to install the script is to first have [GreaseMonkey][greasemonkey] ([Firefox][gm_firefox]) or [TamperMonkey][tampermonkey] ([Chrome][tm_chrome], [Safari][tm_safari], [Opera][tm_opera]). If you have those addons installed already, simply [open the script][script] and follow the prompts to install it.
 
 For more detailed steps, [follow these instructions][instructions] for your particular browser.
+
 [ff_story]: https://www.fanfiction.net/s/7031677
 [greasemonkey]: http://www.greasespot.net/
 [gm_firefox]: https://addons.mozilla.org/en-us/firefox/addon/greasemonkey/
